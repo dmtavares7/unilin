@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrar — Unilin Piên | Tavares Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1b2a4a;
+  --navy2: #2c3e6b;
+  --tx2: #4a5578;
+  --bd: #dde2ed;
+  --blue: #3355e8;
+  --rd: #c42b2b;
+  --bg: #f7f8fb;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(160deg, #eef1f6 0%, #fff 45%, #eef2ff 100%);
+  color: var(--navy);
+  padding: 24px;
+}
+.card {
+  width: 100%;
+  max-width: 400px;
+  background: #fff;
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+  padding: 36px 32px 32px;
+  box-shadow: 0 12px 40px rgba(27, 42, 74, 0.08);
+}
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+p.sub {
+  font-size: 13px;
+  color: var(--tx2);
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--tx2);
+  margin-bottom: 8px;
+}
+input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--bd);
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  margin-bottom: 18px;
+}
+input[type="password"]:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(51, 85, 232, 0.15);
+}
+button {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+button:hover {
+  background: var(--navy2);
+}
+.err {
+  font-size: 13px;
+  color: var(--rd);
+  margin-top: 14px;
+  min-height: 1.2em;
+}
+footer {
+  margin-top: 24px;
+  font-size: 11px;
+  color: var(--tx2);
+  text-align: center;
+}
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Unilin Piên</h1>
+    <p class="sub">Relatório de equipamentos. Digite a senha para continuar.</p>
+    <form id="f" autocomplete="off">
+      <label for="p">Senha</label>
+      <input type="password" id="p" name="p" required autofocus>
+      <button type="submit">Entrar</button>
+      <div class="err" id="e" aria-live="polite"></div>
+    </form>
+    <footer>Tavares Consulting · acesso restrito (senha no código-fonte)</footer>
+  </div>
+  <script>
+    // Troque a senha aqui (proteção apenas visual / contra curiosos).
+    var SENHA = 'unilin';
+    var DESTINO = 'relatorio.html';
+
+    document.getElementById('f').addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var el = document.getElementById('e');
+      el.textContent = '';
+      var v = (document.getElementById('p').value || '').trim();
+      if (v === SENHA) {
+        try { sessionStorage.setItem('unilin_ok', '1'); } catch (x) {}
+        location.href = DESTINO;
+      } else {
+        el.textContent = 'Senha incorreta.';
+      }
+    });
+  </script>
+</body>
+</html>
